@@ -2,7 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.paciente.*;
+import med.voll.api.domain.paciente.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +22,7 @@ public class PacienteController {
   @PostMapping
   @Transactional
   public ResponseEntity<DatosListaPaciente> registrar(@RequestBody @Valid DatosRegistroPaciente datos,
-                                                         UriComponentsBuilder urlComponentBuilder) {
+                                                      UriComponentsBuilder urlComponentBuilder) {
     Paciente paciente = repository.save(new Paciente(datos));
     DatosListaPaciente datosListaPaciente = new DatosListaPaciente(paciente.getId(), paciente.getNombre(), paciente.getEmail(), paciente.getDocumentoIdentidad());
     //Construccion de la url del nuevo elemento
